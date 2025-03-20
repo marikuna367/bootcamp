@@ -9,10 +9,10 @@ class Category(models.Model):
 
 # Product model with ForeignKey relationship
 class Product(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, db_index=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)  # Linking to Category with ForeignKey
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,default=1)  # Linking to Category with ForeignKey
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -57,6 +57,20 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment by {self.author} on {self.post.title}"
+    
+    from django.db import models
+
+class Order(models.Model):
+    customer_name = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product_name = models.CharField(max_length=100)
+    quantity = models.IntegerField()
+
+
+
 
 
 

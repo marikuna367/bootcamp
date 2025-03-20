@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="fw-bold">API Response</h1>
+    <p class="lead">Here is the response from the Django Bootcamp API:</p>
+
+    <div class="alert alert-info mt-4">
+        <strong>Message:</strong> {{ data.message }} <br>
+        <strong>Status:</strong> {{ data.status }}
+    </div>
+</div>
+{% endblock %}
